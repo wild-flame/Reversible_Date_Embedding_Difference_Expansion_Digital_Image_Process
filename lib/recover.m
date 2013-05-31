@@ -1,5 +1,7 @@
 function [x,y,bit] = recover(x,y)
     
+%This is used to recover the image
+
 x = double(x);
 y = double(y);
 l = floor(x/2 + y/2);

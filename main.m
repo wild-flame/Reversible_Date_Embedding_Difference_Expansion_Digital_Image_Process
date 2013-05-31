@@ -21,16 +21,18 @@ imwrite(x1,'horizontally produce.jpg');
 
 %3Vertically 
 for i=1:col                            
-    tmp1=x1(:,i)';
+    tmp1=x(:,i)';
     [ra1,rd1]=hwt(tmp1);
-    x1(:,i)=[ra1,rd1]';                  
+    x2(:,i)=[ra1,rd1]';                  
 end
+x2 = uint8(x2)
 %figure;myimshow(x1,'vertically produce'); 
-imwrite(x1,'vertically produce.jpg');
+imwrite(x2,'vertically produce.jpg');
 
 %% ----------STEP2: Watermark 2 Binary------------ %%
 disp('----------STEP2: Watermark 2 Binary------------')
 %1.To get the Binary Code
+orginal_watermark = imread('myname.JPG');
 watermark = imtobinary('myname.JPG');
 figure;myimshow(watermark,'Befroe');
 
@@ -48,7 +50,7 @@ M=floor(col/2);
 T=caculate_T(length(bits),x);
 
 %Mark ID
-%Step 1.
+%Step 3.1
 %USE ID to mark the node to different set. ID=1:U ID=2:Ne_bar ID=3:Ne,
 %ID=4:M ID=0:Error or Unknown.
 count_ne_bar=0;count_u=0;count_m=0;count_ne=0;count_n=0;count_total=0;ID=[];
@@ -75,7 +77,7 @@ for i=1:row
     end
 end
 
-%Step 2 Draw the Map
+%Step 3.2 Draw the Map
 map = zeros(1,count_n);
 count = 1; %to indicate where I'm writing
 for i=1:row
@@ -95,7 +97,7 @@ payload = [payload, zeros(1,count_m+count_ne-length(payload))]; %match the size 
 %myimshow(payload,'payload')
 
 
-%Step 3.Watermark_Embeding
+%Step 3.3 Watermark_Embeding
 
 %%% ATTENTION 
 %%% In this case M is for more larger than the data that we will
@@ -126,9 +128,9 @@ end
 str=sprintf('We have embeded %d bits in M & Ne ',count-1);
 disp(str);
 
-%Step 4.Image Demonstration or Writing
-% figure;myimshow(x,'After Embedding'); 
-imwrite(x,'marked.tif')
+%Step 3.4.Image Demonstration or Writing
+figure;myimshow(x,'Watermarked Image'); 
+%imwrite(x,'marked.tif')
 
 %% ----------STEP4£ºCompute the Histgram------------ %%%
 % x2 = uint8(x)
@@ -161,7 +163,7 @@ M=floor(d_col/2);
 %length_map=count_n
 %length_watermark=200*100=20000
 
-% -------STEP1: Mark the ID-------- %%
+% STEP5.1: Mark the ID-------- %%
 % This is used to ruturn a martrix to mark each of pixel that is we are here to mark the ID
 
 %ID=1:U
@@ -192,7 +194,7 @@ for i=1:d_row
     end
 end
 
-% STEP2:Draw the location map from M
+% STEP5.2:Draw the location map from M
 d_count = 1; d_map=[]
 for i=1:d_row
     for k=1:M
@@ -207,7 +209,7 @@ for i=1:d_row
     end
 end
 
-% STEP3: Use map to recover Ne and Ne_bar
+% STEP5.3: Use map to recover Ne and Ne_bar
     %2_1 This case is N_e_bar
 d_count=1;
 for i=1:d_row
@@ -226,7 +228,7 @@ for i=1:d_row
     end
 end
 
-% STEP4: Recorver the data.
+% STEP5.4: Recorver the data.
 count = 1; d_payload = []
 for i=1:row
     for k=1:M
@@ -254,8 +256,26 @@ imwrite(d_watermark,'d_watermark.jpg');
 
 
 %% ----------STEP6£ºComparing------------ %%
+%figure;
+
+%subplot(2,1,1);imhist(orginal_watermark)
+
+for i = 1:100
+    for j = 1:200
+        if d_watermark(i,j) == 1
+        d_watermark(i,j) = 255;
+        end
+    end
+end
+
+%subplot(2,1,2);imhist(d_watermark)
+%title('compare the hist of the image')
+
 figure;
-subplot(2,2,1);imhist(x_original)
-subplot(2,2,2);imhist(x)
-subplot(2,2,3);imhist(watermark)
-subplot(2,2,4);imhist(d_watermark)
+subplot(2,1,1)
+imhist(x_original)
+title('The histogram for lena')
+subplot(2,1,2)
+x = uint8(x)
+imhist(x)
+title('The histogram for lena')
