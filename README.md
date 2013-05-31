@@ -6,6 +6,6 @@ Reversible Data Embedding Using A novel Difference Expansion
 
 MATLAB CODE
 
-David LIn @ National Chiao Tung University 
+David Lin @ National Chiao Tung University 
 
 ---

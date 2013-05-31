@@ -9,5 +9,6 @@ y = double(y);
 l = floor(x/2 + y/2);
 h = x - y;
 h = 2 * h + bit;
+h = double(h);
 x = l + floor((h + 1)/2);
 y = l - floor(h/2);
