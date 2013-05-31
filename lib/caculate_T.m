@@ -13,7 +13,7 @@ for i=1:row
         if h(i,k) > 2 * T + 1 || ((x(i,2*k-1) + x(i,2*k)) * 1/2) >=  255 - T || ((x(i,2*k-1) + x(i,2*k)) * 1/2) < T 
         count_u =count_u + 1;
         ID(i,k) = 1; %u
-        elseif h(i,k) > floor(T/2) 
+        elseif h(i,k) > floor((T-1)/2) 
         count_n=count_n + 1;
             if h(i,k) > floor(T)  
             count_ne_bar=count_ne_bar + 1;

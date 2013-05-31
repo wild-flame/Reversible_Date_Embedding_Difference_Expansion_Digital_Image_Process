@@ -32,7 +32,7 @@ imwrite(x1,'vertically produce.jpg');
 disp('----------STEP2: Watermark 2 Binary------------')
 %1.To get the Binary Code
 watermark = imtobinary('myname.JPG');
-%figure;myimshow(watermark,'Befroe');
+figure;myimshow(watermark,'Befroe');
 
 %2.Change it shape to a line of binary code.
 bits = reshape(watermark,1,[]);
@@ -59,7 +59,7 @@ for i=1:row
         if h(i,k) > 2 * T + 1 || ((x(i,2*k-1) + x(i,2*k)) * 1/2) >=  255 - T || ((x(i,2*k-1) + x(i,2*k)) * 1/2) < T 
         count_u =count_u + 1;
         ID(i,k) = 1; %u
-        elseif h(i,k) > floor(T/2) 
+        elseif h(i,k) > floor((T-1)/2) 
         count_n=count_n + 1;
             if h(i,k) > floor(T)  
             count_ne_bar=count_ne_bar + 1;
@@ -171,7 +171,6 @@ M=floor(d_col/2);
 %ID=5;N
 %ID=0:Error or Unknown. (NOT USED IN THIS CASE)
 
-T=6;
 d_count_ne_bar=0;d_count_u=0;d_count_m=0;d_count_ne=0;d_count_n=0;d_count_total=0;d_ID=zeros(d_row,M);
 for i=1:d_row
     for k=1:M
@@ -182,7 +181,7 @@ for i=1:d_row
         d_count_u =d_count_u + 1;
         d_ID(i,k) = 1; 
         %3.This case is M
-        elseif d_h(i,k) >= -6 && d_h(i,k) <= 7
+        elseif d_h(i,k) >= 2 * fix(-(T-1)/2) && d_h(i,k) <= 2 * fix((T-1)/2) + 1 % d_h(i,k) >= 2 * fix(-(T-1)/2) && d_h(i,k) <= 2 * ((T-1)/2)
         d_count_m=d_count_m + 1;
         d_ID(i,k) = 4; %m
         %2. This case is N
@@ -242,17 +241,15 @@ count;
 for i=1:row
     for k=1:M
         if ID(i,k) == 3
-            if x(i,2*k-1) - x(i,2*k) > 0
             [x(i,2*k-1),x(i,2*k),d_payload(count)] = recover(x(i,2*k-1),x(i,2*k));
             count=count+1;
-            end
         end
     end
 end
 
-d_watermark = reshape(d_payload((count_n+1):(count_n+20000)),100,200);
+d_watermark = reshape(d_payload((d_count_n+1):(d_count_n+20000)),100,200);
 figure;
-imshow(d_watermark);
+figure;myimshow(d_watermark,'After')
 imwrite(d_watermark,'d_watermark.jpg');
 
 
