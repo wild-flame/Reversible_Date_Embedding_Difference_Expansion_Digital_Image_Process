@@ -7,4 +7,4 @@ This is for Digital Image Processing, and you can see detailed information in RE
 
 2013@NCTU
 
-Wildflame(David Lin
+Wildflame(David Lin)
