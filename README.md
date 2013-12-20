@@ -1,4 +1,4 @@
-Reversible_Date_Embedding_Difference_Expansion_Digital_Image_Process
+Reversible Date Embedding
 ====================================================================
 
 Embed Data Into a Picture reversibly using difference expansion
