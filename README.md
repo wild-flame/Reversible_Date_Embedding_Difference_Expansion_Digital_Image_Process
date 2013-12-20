@@ -54,7 +54,7 @@ Originally Picture:
 
 Decoded Results:
 
-<img src="./d_watermark.jpg" alt="Decoded Results">
+<img src="./figure/d_watermark.jpg" alt="Decoded Results">
 
 The original picture is 0-255 digit per pixel while the embedded data can only be 0-1, so their must be some data to lose. If the original data only contains 0-1, nothing will be lost.
 
