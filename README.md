@@ -13,7 +13,7 @@ Since github is not good at handling math formulas, I did not write down all the
 
 Otherwise you could see through the two papers listed in the References, they were written in English and all the principles are the same. However, there is a minor mistake in the second paper, 
           
-The pixels in the picture is divided into four groups, M, N (Ne & Ne_), U by the threshold T.
+The pixels in the picture are divided into four groups, M, N (Ne & Ne_), U by the threshold T.
 
 It should be:
 
@@ -45,6 +45,18 @@ versions of the Lena image. Show the histogram of the diffidence image.
 
 **Step 6** Extract the embedded binary printed signature and also restore the
 original Lena image from the watermarked image obtained above.
+
+## Demo Results
+
+Originally Picture:
+
+<img src="./figure/myname.JPG" alt="Orginally Picture">
+
+Decoded Results:
+
+<img src="./d_watermark.jpg" alt="Decoded Results">
+
+The original picture is 0-255 digit per pixel while the embedded data can only be 0-1, so their must be some data to lose. If the original data only contains 0-1, nothing will be lost.
 
 ## References
 
