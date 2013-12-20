@@ -13,7 +13,7 @@ Since github is not good at handling math formulas, I did not write down all the
 
 Otherwise you could see through the two papers listed in the References, they were written in English and all the principles are the same. However, there is a minor mistake in the second paper, 
           
-The pixels in the picture is divided into four groups, M, N(Ne&Ne_), U by the threshold T.
+The pixels in the picture is divided into four groups, M, N (Ne & Ne_), U by the threshold T.
 
 It should be:
 
